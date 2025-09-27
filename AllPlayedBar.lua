@@ -319,12 +319,9 @@ function AllPlayedBar.ShowContextMenu()
             notCheckable = true
         },
         {
-            text = "Réinitialiser position",
+            text = "Recentrer la barre",
             func = function()
-                barFrame:ClearAllPoints()
-                barFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 100, -100)
-                barFrame:SetSize(300, 60)
-                SaveBarConfig()
+                AllPlayedBar.ResetPosition()
             end,
             notCheckable = true
         }
@@ -404,6 +401,39 @@ function AllPlayedBar.ForceShow()
         isBarVisible = true
         barText:SetText("Test: Barre visible!")
         print("|cff00ff00[AllPlayed]|r Barre forcée à l'affichage!")
+    else
+        print("|cffff0000[AllPlayed]|r ERREUR: Impossible de créer la barre!")
+    end
+end
+
+-- Fonction pour réinitialiser la position de la barre au centre
+function AllPlayedBar.ResetPosition()
+    if not barFrame then
+        CreatePlaytimeBar()
+    end
+    
+    if barFrame then
+        -- Nettoyer tous les points d'ancrage
+        barFrame:ClearAllPoints()
+        
+        -- Centrer la barre au milieu de l'écran (0,0)
+        barFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+        
+        -- Remettre la taille par défaut
+        barFrame:SetSize(defaultBarConfig.width, defaultBarConfig.height)
+        
+        -- Sauvegarder la nouvelle position
+        SaveBarConfig()
+        
+        -- Afficher la barre si elle était cachée
+        if not isBarVisible then
+            AllPlayedBar.ShowBar()
+        else
+            -- Juste mettre à jour le texte
+            UpdateBarText()
+        end
+        
+        print("|cff00ff00[AllPlayed]|r Barre recentrée au milieu de l'écran (0,0)")
     else
         print("|cffff0000[AllPlayed]|r ERREUR: Impossible de créer la barre!")
     end

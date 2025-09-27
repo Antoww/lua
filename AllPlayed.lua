@@ -179,6 +179,7 @@ SlashCmdList["ALLPLAYED"] = function(msg)
         print("|cffffff00/aplayed bar|r - Affiche/masque la barre de temps")
         print("|cffffff00/aplayed bar show|r - Affiche la barre de temps")
         print("|cffffff00/aplayed bar hide|r - Masque la barre de temps")
+        print("|cffffff00/aplayed bar reset|r - Recentre la barre au milieu de l'écran")
         print("|cffffff00/aplayed session|r - Affiche le temps de session actuelle")
         print("|cffffff00/aplayed update|r - Met à jour le temps de jeu du personnage actuel")
         print("|cffffff00/aplayed help|r - Affiche cette aide")
@@ -227,6 +228,12 @@ SlashCmdList["ALLPLAYED"] = function(msg)
     elseif msg == "force" then
         if AllPlayedBar and AllPlayedBar.ForceShow then
             AllPlayedBar.ForceShow()
+        else
+            print("|cffff0000[AllPlayed] Erreur: Module barre non disponible.|r")
+        end
+    elseif msg == "bar reset" then
+        if AllPlayedBar and AllPlayedBar.ResetPosition then
+            AllPlayedBar.ResetPosition()
         else
             print("|cffff0000[AllPlayed] Erreur: Module barre non disponible.|r")
         end

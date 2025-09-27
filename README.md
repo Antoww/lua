@@ -78,6 +78,7 @@ Après connexion, vous devriez voir dans le chat :
 | `/aplayed bar` | Affiche/masque la barre de temps |
 | `/aplayed bar show` | Affiche la barre de temps |
 | `/aplayed bar hide` | Masque la barre de temps |
+| `/aplayed bar reset` | Recentre la barre au milieu de l'écran |
 
 ## 🎛️ Barre de temps interactive
 
@@ -115,7 +116,7 @@ Global: 127h 15m 12s
 - **Mode d'affichage** : Choisir entre les 4 modes
 - **Réinitialiser session** : Remet le compteur de session à zéro
 - **Masquer la barre** : Cache la barre
-- **Réinitialiser position** : Remet la barre à sa position par défaut
+- **Recentrer la barre** : Remet la barre au centre de l'écran (0,0)
 
 ## 📊 Exemple d'utilisation
 
@@ -178,7 +179,8 @@ Pour réinitialiser complètement l'addon :
 
 ### La barre n'apparaît pas
 1. Utilisez `/aplayed bar show`
-2. Vérifiez si elle n'est pas hors écran : `/aplayed bar` puis clic droit → "Réinitialiser position"
+2. Recentrez la barre : `/aplayed bar reset` (centre à la position 0,0)
+3. Vérifiez si elle n'est pas hors écran avec le menu contextuel
 
 ### La barre est vide/affiche des zéros
 1. Attendez 2-3 secondes après la connexion (temps de chargement des données)
@@ -187,11 +189,12 @@ Pour réinitialiser complètement l'addon :
 4. La barre se mettra à jour automatiquement une fois les données chargées
 
 ### La barre ne s'affiche plus du tout
-1. **Test de diagnostic** : `/aplayed debug` pour vérifier les modules chargés
-2. **Force l'affichage** : `/aplayed force` pour tester la création de la barre
-3. **Recharge complète** : Tapez `/reload` dans le chat pour recharger l'interface
-4. **Vérifiez les erreurs** : Ouvrez la console d'erreurs avec `/console scriptErrors 1`
-5. **Réinstallation** : Si rien ne fonctionne, supprimez et réinstallez l'addon
+1. **Recentrage rapide** : `/aplayed bar reset` pour la remettre au centre
+2. **Test de diagnostic** : `/aplayed debug` pour vérifier les modules chargés
+3. **Force l'affichage** : `/aplayed force` pour tester la création de la barre
+4. **Recharge complète** : Tapez `/reload` dans le chat pour recharger l'interface
+5. **Vérifiez les erreurs** : Ouvrez la console d'erreurs avec `/console scriptErrors 1`
+6. **Réinstallation** : Si rien ne fonctionne, supprimez et réinstallez l'addon
 
 ### Données manquantes
 1. Utilisez `/aplayed update` pour forcer la mise à jour
@@ -253,7 +256,8 @@ Ce projet est sous licence MIT. Vous êtes libre de l'utiliser, le modifier et l
 1. **Installation** : Copiez les fichiers dans `Interface\AddOns\AllPlayed\`
 2. **Première utilisation** : `/aplayed` pour voir vos stats
 3. **Barre de temps** : `/aplayed bar` pour l'afficher
-4. **Personnalisation** : Clic droit sur la barre pour les options
-5. **Aide** : `/aplayed help` pour toutes les commandes
+4. **Si barre invisible** : `/aplayed bar reset` pour la recentrer
+5. **Personnalisation** : Clic droit sur la barre pour les options
+6. **Aide** : `/aplayed help` pour toutes les commandes
 
 **Bon jeu ! 🎮**

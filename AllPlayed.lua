@@ -214,6 +214,22 @@ SlashCmdList["ALLPLAYED"] = function(msg)
         else
             print("|cffff0000[AllPlayed] Erreur: Module session non disponible.|r")
         end
+    elseif msg == "debug" then
+        print("|cff00ff00[AllPlayed] Debug:|r")
+        print("- AllPlayed chargé: " .. (AllPlayed and "OUI" or "NON"))
+        print("- AllPlayedBar chargé: " .. (AllPlayedBar and "OUI" or "NON"))
+        print("- AllPlayedDB existe: " .. (AllPlayedDB and "OUI" or "NON"))
+        if AllPlayedDB then
+            local realmName = GetRealmName()
+            print("- Serveur actuel: " .. (realmName or "INCONNU"))
+            print("- Données serveur: " .. (AllPlayedDB[realmName] and "OUI" or "NON"))
+        end
+    elseif msg == "force" then
+        if AllPlayedBar and AllPlayedBar.ForceShow then
+            AllPlayedBar.ForceShow()
+        else
+            print("|cffff0000[AllPlayed] Erreur: Module barre non disponible.|r")
+        end
     else
         print("|cffff0000[AllPlayed] Commande inconnue. Tapez /aplayed help pour l'aide.|r")
     end

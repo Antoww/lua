@@ -148,6 +148,8 @@ local function CreatePlaytimeBar()
         return barFrame
     end
     
+    print("|cff00ff00[AllPlayed]|r Création de la barre de temps...")
+    
     local config = LoadBarConfig()
     
     -- Créer la frame principale
@@ -241,6 +243,8 @@ local function CreatePlaytimeBar()
         GameTooltip:Hide()
     end)
     
+    print("|cff00ff00[AllPlayed]|r Barre créée avec succès!")
+    
     return barFrame
 end
 
@@ -331,12 +335,6 @@ end
 
 -- Fonction pour afficher la barre
 function AllPlayedBar.ShowBar()
-    -- Vérifier que le module principal est chargé
-    if not AllPlayed then
-        print("|cffff0000[AllPlayed]|r Erreur: Module principal non chargé.")
-        return
-    end
-    
     if not barFrame then
         CreatePlaytimeBar()
     end
@@ -345,8 +343,8 @@ function AllPlayedBar.ShowBar()
     isBarVisible = true
     
     -- S'assurer que barConfig existe
-    if AllPlayedDB then
-        AllPlayedDB.barConfig = AllPlayedDB.barConfig or LoadBarConfig()
+    local config = LoadBarConfig()
+    if AllPlayedDB and AllPlayedDB.barConfig then
         AllPlayedDB.barConfig.visible = true
     end
     
@@ -355,9 +353,10 @@ function AllPlayedBar.ShowBar()
         updateTimer:Cancel()
     end
     
-    local config = (AllPlayedDB and AllPlayedDB.barConfig) or defaultBarConfig
     updateTimer = C_Timer.NewTicker(config.updateInterval, UpdateBarText)
-    UpdateBarText()
+    
+    -- Forcer une mise à jour immédiate
+    C_Timer.After(0.1, UpdateBarText)
     
     print("|cff00ff00[AllPlayed]|r Barre de temps affichée")
 end
@@ -369,7 +368,10 @@ function AllPlayedBar.HideBar()
     end
     
     isBarVisible = false
-    AllPlayedDB.barConfig.visible = false
+    
+    if AllPlayedDB and AllPlayedDB.barConfig then
+        AllPlayedDB.barConfig.visible = false
+    end
     
     if updateTimer then
         updateTimer:Cancel()
@@ -388,19 +390,41 @@ function AllPlayedBar.ToggleBar()
     end
 end
 
+-- Fonction de test pour forcer l'affichage de la barre
+function AllPlayedBar.ForceShow()
+    print("|cff00ff00[AllPlayed]|r Force l'affichage de la barre...")
+    
+    if not barFrame then
+        print("|cff00ff00[AllPlayed]|r Création forcée de la barre...")
+        CreatePlaytimeBar()
+    end
+    
+    if barFrame then
+        barFrame:Show()
+        isBarVisible = true
+        barText:SetText("Test: Barre visible!")
+        print("|cff00ff00[AllPlayed]|r Barre forcée à l'affichage!")
+    else
+        print("|cffff0000[AllPlayed]|r ERREUR: Impossible de créer la barre!")
+    end
+end
+
 -- Fonction d'initialisation
 function AllPlayedBar.Initialize()
-    local config = LoadBarConfig()
-    
     -- Initialiser le timer de session
     ResetSessionTimer()
     
-    if config.visible then
-        -- Délai pour s'assurer que l'interface est prête
-        C_Timer.After(1, function()
-            AllPlayedBar.ShowBar()
-        end)
-    end
+    -- Attendre que AllPlayedDB soit disponible avant de charger la config
+    C_Timer.After(0.5, function()
+        local config = LoadBarConfig()
+        
+        if config.visible then
+            -- Délai pour s'assurer que l'interface est prête
+            C_Timer.After(1, function()
+                AllPlayedBar.ShowBar()
+            end)
+        end
+    end)
 end
 
 -- Fonction appelée quand les données de temps sont mises à jour

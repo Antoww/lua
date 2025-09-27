@@ -64,6 +64,13 @@ Après connexion, vous devriez voir dans le chat :
 | `/aplayed update` | Met à jour manuellement le temps de jeu |
 | `/aplayed session` | Affiche le temps de session dans le chat |
 
+### Commandes de débogage
+
+| Commande | Description |
+|----------|-------------|
+| `/aplayed debug` | Affiche les informations de diagnostic |
+| `/aplayed force` | Force l'affichage de la barre (test) |
+
 ### Commandes de la barre
 
 | Commande | Description |
@@ -178,6 +185,13 @@ Pour réinitialiser complètement l'addon :
 2. Utilisez `/aplayed update` pour forcer la récupération des données
 3. Déconnectez-vous et reconnectez-vous pour réinitialiser l'addon
 4. La barre se mettra à jour automatiquement une fois les données chargées
+
+### La barre ne s'affiche plus du tout
+1. **Test de diagnostic** : `/aplayed debug` pour vérifier les modules chargés
+2. **Force l'affichage** : `/aplayed force` pour tester la création de la barre
+3. **Recharge complète** : Tapez `/reload` dans le chat pour recharger l'interface
+4. **Vérifiez les erreurs** : Ouvrez la console d'erreurs avec `/console scriptErrors 1`
+5. **Réinstallation** : Si rien ne fonctionne, supprimez et réinstallez l'addon
 
 ### Données manquantes
 1. Utilisez `/aplayed update` pour forcer la mise à jour

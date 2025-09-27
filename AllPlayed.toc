@@ -1,0 +1,10 @@
+## Interface: 110007
+## Title: All Played
+## Notes: Tracks playtime across all characters and provides /aplayed command with resizable playtime bar
+## Author: TonTon
+## Version: 1.1.0
+## SavedVariables: AllPlayedDB
+## OptionalDeps: Ace3
+
+AllPlayed.lua
+AllPlayedBar.lua
